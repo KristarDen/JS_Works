@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1_3</title>
+</head>
+<body>
+    <script>
+        let right = 100;
+        let left = 0;
+        let middle = (right-left)/2;
+        
+
+        let answer = 0;
+
+        while(answer!=3)
+        {
+            answer=parseInt(prompt(`Yournumber bigger that ${middle}(1),less(2),equally(3)`));
+            switch(answer){
+                case 1://Bigger
+                left=middle;
+                middle = (right-left)/2;
+                    break;
+
+                case 2://Less
+                    break;
+
+                case 3:
+                    break;
+            }
+
+
+        }
+
+    </script>
+</body>
+</html>

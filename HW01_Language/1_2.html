@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1_2</title>
+</head>
+<body>
+    <script>
+        function NumberIsLucky(number)
+        {
+            if(number>999999){
+                alert("число должно быть шестизначным");
+                return false;
+            }
+            debugger;
+            let firsSum=0,secondSum=0;
+            
+            let NumStr = number.toString();
+            for(let i=0;i<NumStr.length;i++)
+            {
+                if(i<3)firsSum+=parseInt(NumStr[i]);
+                else secondSum+=parseInt(NumStr[i]);
+            }
+           if(firsSum==secondSum){
+               return true;
+           }
+           else{
+               return false;
+           }
+            
+
+        }
+    </script>
+
+    <script>
+        let number;
+        do{
+            number=parseInt(prompt("Enter your number"));
+        }while(isNaN(number)==true)
+        
+        
+
+        if(NumberIsLucky(number)==true){
+            alert(`number ${number} is lucky =)`);
+        }
+        else{
+            alert(`number ${number} is not lucky =(`);
+        }
+    </script>
+</body>
+</html>

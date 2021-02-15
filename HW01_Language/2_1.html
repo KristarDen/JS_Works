@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2_1</title>
+</head>
+<body>
+    <script>
+        let Questions = [
+            "Самая длинная река в мире - Амазонка ?",
+            "Каспийское море - самое большое в мире ?",
+            "Глубина марианской впадины 10994 м. ?"
+        ];
+
+        let CorrectAnswers = [
+            false,
+            true,
+            true
+        ];
+
+        let Score = 0;
+
+        let userAnswers = [];
+
+        for(let i=0; i<Questions.length ; i++){
+           userAnswers[i] = confirm(Questions[i]);
+           if (userAnswers[i]==CorrectAnswers[i])Score++;
+        }
+        alert(`Вы правильно ответили на ${Score} из ${Questions.length}`);
+    </script>
+    
+</body>
+</html>

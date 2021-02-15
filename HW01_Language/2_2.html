@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2_2</title>
+</head>
+<body>
+    <script>
+        let Name;
+        let UncorectSymbols = "1234567890~@#$%^-_(){}'`+=[]:;«»,/!/\:*?<>|";
+        
+        do{
+            Name = prompt("Введите ваше ФИО");
+        }while(Name=="")
+        debugger;
+
+        function IsCorect()
+        {
+
+        
+         for(let i=0;i<UncorectSymbols.length;i++)
+         {
+            if(Name.includes(UncorectSymbols[i])==true){
+              return false;
+            }
+         }
+        }
+        if(IsCorect()==false)alert("Вы использовали недопустимые символы");
+        
+    </script>
+</body>
+</html>

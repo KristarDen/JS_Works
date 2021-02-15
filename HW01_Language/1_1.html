@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1_1
+        
+    </title>
+</head>
+<body>
+    <script>
+        function GetInfo()
+        {
+         do{
+             Name= prompt("ФИО : ");
+         }while(Name=="")
+
+         do{
+             sex= prompt("Пол : ");
+         }while(sex=="")
+
+         do{
+              age= prompt("Возраст : ");
+          }while(age=="")
+
+         do{
+              email= prompt("E-mail : ");
+         }while(email=="")
+         
+        }
+    </script>
+    <script>
+        let Name, sex, age, email;
+        do{
+            GetInfo();
+        }while(confirm(`Фио: ${Name}\nПол : ${sex}\nВозраст :${age}\nE-mail :${email}\nВсё верно?`)!=true)
+       
+       
+    </script>
+    
+</body>
+</html>
