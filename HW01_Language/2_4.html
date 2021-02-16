@@ -5,8 +5,62 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>2_4</title>
+    
 </head>
 <body>
-    
+    <script>
+        //debugger;
+        for(let i=0;i<8;i++)
+        {
+            let StringDiv = document.createElement('div');
+            StringDiv.style.alignItems="center";
+            StringDiv.style.position="float";
+            StringDiv.style.width="80px";
+            for(let j=0;j<8;j++)
+            {
+                let Cell_div
+                if(i%2==0)
+                {
+                    if(j%2==0)
+                    {
+                        Cell_div = document.createElement('div');
+                        Cell_div.style.backgroundColor = 'yellow';
+                        Cell_div.style.width='10px';
+                        Cell_div.style.height='10px';
+                        Cell_div.textContent = ' ';
+                    }
+                    else
+                    {
+                        Cell_div = document.createElement('div');
+                        Cell_div.style.backgroundColor = 'red';
+                        Cell_div.style.width='10px';
+                        Cell_div.style.height='10px';
+                        Cell_div.textContent = ' ';
+                    }
+                }
+                else
+                {
+                    if(j%2==0)
+                    {
+                        Cell_div = document.createElement('div');
+                        Cell_div.style.backgroundColor = 'red';
+                        Cell_div.style.width='10px';
+                        Cell_div.style.height='10px';
+                        Cell_div.textContent = ' ';
+                    }
+                    else
+                    {
+                        Cell_div = document.createElement('div');
+                        Cell_div.style.backgroundColor = 'yellow';
+                        Cell_div.style.width='10px';
+                        Cell_div.style.height='10px';
+                        Cell_div.textContent = ' ';
+                    }
+                }
+                StringDiv.appendChild(Cell_div);
+            }
+            document.body.appendChild(StringDiv);
+        }
+    </script>
 </body>
 </html>
