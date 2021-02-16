@@ -9,13 +9,10 @@
 </head>
 <body>
     <script>
-        //debugger;
         for(let i=0;i<8;i++)
         {
             let StringDiv = document.createElement('div');
-            StringDiv.style.alignItems="center";
-            StringDiv.style.position="float";
-            StringDiv.style.width="80px";
+            StringDiv.style.float="left";
             for(let j=0;j<8;j++)
             {
                 let Cell_div
@@ -25,16 +22,16 @@
                     {
                         Cell_div = document.createElement('div');
                         Cell_div.style.backgroundColor = 'yellow';
-                        Cell_div.style.width='10px';
-                        Cell_div.style.height='10px';
+                        Cell_div.style.width='20px';
+                        Cell_div.style.height='20px';
                         Cell_div.textContent = ' ';
                     }
                     else
                     {
                         Cell_div = document.createElement('div');
                         Cell_div.style.backgroundColor = 'red';
-                        Cell_div.style.width='10px';
-                        Cell_div.style.height='10px';
+                        Cell_div.style.width='20px';
+                        Cell_div.style.height='20px';
                         Cell_div.textContent = ' ';
                     }
                 }
@@ -44,16 +41,16 @@
                     {
                         Cell_div = document.createElement('div');
                         Cell_div.style.backgroundColor = 'red';
-                        Cell_div.style.width='10px';
-                        Cell_div.style.height='10px';
+                        Cell_div.style.width='20px';
+                        Cell_div.style.height='20px';
                         Cell_div.textContent = ' ';
                     }
                     else
                     {
                         Cell_div = document.createElement('div');
                         Cell_div.style.backgroundColor = 'yellow';
-                        Cell_div.style.width='10px';
-                        Cell_div.style.height='10px';
+                        Cell_div.style.width='20px';
+                        Cell_div.style.height='20px';
                         Cell_div.textContent = ' ';
                     }
                 }
