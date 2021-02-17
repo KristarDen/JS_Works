@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1_DOM</title>
+</head>
+<body>
+
+    <div style="margin-bottom: 5px;">
+        <input name="Checkbox_Add_Element" type="checkbox" unchecked>
+        Добавить элемент в конец списка
+        <input name="Text_Add_Element" maxlength="30">
+    </div>
+
+    <div style="margin-bottom: 5px;">
+        <input name="Checkbox_Insert_Element" type="checkbox" unchecked>
+        Вствить элемент списка
+        <input name="Text_Insert_Element" maxlength="30">
+    </div>
+
+    <div style="margin-bottom: 5px;">
+        <input name="Checkbox_Edit_Element" type="checkbox" unchecked>
+        Изменить текст элемента списка
+        <input name="Text_Edit_Element" maxlength="30">
+    </div>
+
+    <div style="margin-bottom: 5px;">
+        <input name="Checkbox_Add_List" type="checkbox" unchecked>
+        Добавить вложеный список
+        <input name="Text_Add_List" maxlength="30">
+    </div>
+
+    <div style="margin-bottom: 5px;">
+        <input name="Checkbox_Delete_Element" type="checkbox" unchecked>
+        Удалить элемент списка
+        <input name="Text_Delete_Element" maxlength="30">
+    </div>
+
+    <input type="button" onclick="add_NewList()" name="Button_Add_List" value="Добавить новый список" style="padding-right: 30px; padding-left: 30px;"></input>
+
+    
+    <script>
+        let ListsCount = 1;
+        function add_NewList()
+        {
+            console.log('element added');
+            let newList = document.createElement('ul');
+            newList.id=ListsCount;
+
+            let listName = document.createElement('li');
+            listName.textContent=`Список${ListsCount}`;
+
+            let firstElement = document.createElement('ul');
+            firstElement.appendChild(document.createElement('li'));
+
+            listName.appendChild(firstElement);
+
+            newList.appendChild(listName);
+
+            document.body.appendChild(newList);
+            ListsCount++;
+        }
+
+        function add_Element()
+        {
+
+        }
+    </script>
+
+</body>
+</html>
