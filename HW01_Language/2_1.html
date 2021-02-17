@@ -24,9 +24,9 @@
 
         let userAnswers = [];
 
-        for(let i=0; i<Questions.length ; i++){
+        for(let i = 0; i < Questions.length ; i++){
            userAnswers[i] = confirm(Questions[i]);
-           if (userAnswers[i]==CorrectAnswers[i])Score++;
+           if (userAnswers[i] == CorrectAnswers[i]) Score++;
         }
         alert(`Вы правильно ответили на ${Score} из ${Questions.length}`);
     </script>
