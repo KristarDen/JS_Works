@@ -8,40 +8,40 @@
 </head>
 <body>
     <script>
-        let protocol="";
-        let host="";
-        let source="";
-        let fileName="";
-        let requestString="";
+        let protocol = "";
+        let host = "";
+        let source = "";
+        let fileName = "";
+        let requestString = "";
 
         let address = prompt("address");
 
         
-        for(let i=0;i<address.indexOf(":");i++)
-        {
-            protocol+=address[i];
+        for(let i = 0; i < address.indexOf(":"); i++){
+            
+            protocol += address[i];
         }
         //alert(`${protocol}`);
-        for(let i=address.indexOf("://")+3;address[i]!="/";i++)
-        {
-            host+=address[i];
+        for(let i = address.indexOf("://") + 3; address[i] != "/"; i++){
+            
+            host += address[i];
         }
         debugger;
 
-        for(let i=address.lastIndexOf("/")+1; address[i]!="?";i++)
+        for(let i = address.lastIndexOf("/") + 1; address[i] != "?"; i++)
         {
             
-            fileName+=address[i];
+            fileName += address[i];
         }
 
-        for(let i=(address.indexOf("://") + 3 + host.length);i<address.lastIndexOf("/");i++)
+        for(let i = (address.indexOf("://") + 3 + host.length); i < address.lastIndexOf("/"); i++)
         {
-            source+=address[i];
+            source +=address[i];
         }
 
-        for(let i=address.lastIndexOf("?")+1; i<address.length;i++)
+        for(let i = address.lastIndexOf("?") + 1; i < address.length;i++)
         {
-            requestString+=address[i];
+            requestString += address[i];
         }
 
 
