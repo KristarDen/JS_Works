@@ -8,41 +8,44 @@
 </head>
 <body>
     <script>
-        function NumberIsLucky(number)
-        {
-            if(number>999999){
-                alert("число должно быть шестизначным");
+        function NumberIsLucky(number){
+            
+            if( number > 999999 ){
+                alert( "число должно быть шестизначным" );
                 return false;
             }
+            
             debugger;
-            let firsSum=0,secondSum=0;
+            
+            let firsSum = 0, secondSum = 0;
             
             let NumStr = number.toString();
-            for(let i=0;i<NumStr.length;i++)
-            {
-                if(i<3)firsSum+=parseInt(NumStr[i]);
-                else secondSum+=parseInt(NumStr[i]);
+            
+            for(let i = 0; i < NumStr.length; i++){
+                
+                if (i < 3) firsSum += parseInt(NumStr[i]);
+                else secondSum += parseInt(NumStr[i]);
             }
-           if(firsSum==secondSum){
-               return true;
-           }
-           else{
-               return false;
-           }
+            
+           if(firsSum == secondSum) return true;
+            
+           else return false;
             
 
         }
     </script>
 
     <script>
+        
         let number;
+        
         do{
-            number=parseInt(prompt("Enter your number"));
-        }while(isNaN(number)==true)
+            number = parseInt( prompt( "Enter your number" ) );
+        }while( isNaN(number) == true)
         
         
 
-        if(NumberIsLucky(number)==true){
+        if( NumberIsLucky(number) == true ){
             alert(`number ${number} is lucky =)`);
         }
         else{
