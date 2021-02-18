@@ -41,33 +41,73 @@
     <input type="button" onclick="add_NewList()" name="Button_Add_List" value="Добавить новый список" style="padding-right: 30px; padding-left: 30px;"></input>
 
     
-    <script>
-        let ListsCount = 1;
-        function add_NewList()
-        {
-            console.log('element added');
-            let newList = document.createElement('ul');
-            newList.id=ListsCount;
-
-            let listName = document.createElement('li');
-            listName.textContent=`Список${ListsCount}`;
-
-            let firstElement = document.createElement('ul');
-            firstElement.appendChild(document.createElement('li'));
-
-            listName.appendChild(firstElement);
-
-            newList.appendChild(listName);
-
-            document.body.appendChild(newList);
-            ListsCount++;
-        }
-
-        function add_Element()
-        {
-
-        }
-    </script>
+    
 
 </body>
+<script>
+    let ListsCount = 1;
+
+    function add_NewList(){
+        debugger;
+        console.log('element added');
+        let newList = document.createElement('ul');
+        newList.id = ListsCount;
+
+        let listName = document.createElement('li');
+        listName.textContent = Список${ListsCount};
+
+        let firstElement = document.createElement('ul');
+        firstElement.addEventListener('click',function(e){
+            let id = e.target.id;
+            Element_click(id);
+        })
+
+        let firstElementChild = document.createElement('li');
+        
+        firstElementChild.id = ${ListsCount}_1;
+        firstElement.appendChild(firstElementChild);
+        firstElementChild.value = "new list";
+
+        listName.appendChild(firstElement);
+
+        newList.appendChild(listName);
+
+        document.body.appendChild(newList);
+        ListsCount++;
+    }
+
+    function add_Element(){
+
+    }
+
+     function Element_click(ElementName){
+        debugger;
+        console.log("click");
+        if (document.getElementsByName('Checkbox_Edit_Element')){
+
+            let textbox = document.getElementsByName('Text_Edit_Element');
+           
+            document.getElementById(`${ElementName}`).value =  textbox.value;
+            let element =  document.getElementById(ElementName);
+
+            console.log("text changed");
+        }
+
+        else if (document.getElementsByName('Checkbox_Add_Element') == true){
+
+        } 
+
+        else if (document.getElementsByName('Checkbox_Insert_Element') == true){
+
+        }   
+
+    }
+    function Edit_Element(){
+
+       
+        if(checkbox.checked == true){
+
+        }
+    }
+</script>
 </html>
