@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1_2</title>
+</head>
+<body>
+
+    <div name="TextControl">
+        <input type="text" id="TextBox" width="200">
+        <input type="color" id="TextColor" value="#FF0000">
+        <input type="button" onclick="UseMarker()" width="50" value="Enter">
+    </div>
+    <div id="markerPecent"></div>
+    <div id="Result" >
+
+    </div> 
+
+    <script>
+
+        class Marker{
+
+            color = "#FF0000";
+            #defaultColor = "#FF0000";
+            #uncoloredColor = "#C0C0C0";
+            percentInk = 100.0;
+
+            set setColor(color){
+                debugger;
+
+               if ( color[0] == "#" ) this.color = color;
+
+               else alert("Wrong format of color");
+
+            }
+
+            get getColor(){
+                return this.color;
+            }
+            
+            get getPercent(){
+                return this.percentInk;
+            }
+
+            print(ElementName, text){
+                debugger;
+                let ColoredTextElement = document.createElement('div');
+                let ColoredText = "";
+
+                //проверяем какие буквы нужно выделить цветным
+                for(let index = 0; this.percentInk > 0 && index < text.length; this.percentInk -= 0.5 ){
+
+                    ColoredText += text[index];
+                    index++;
+                }
+                //пробуем присвоить пользовательский цвет
+                ColoredTextElement.textContent = ColoredText;
+                try{
+                    ColoredTextElement.style.color = this.color;
+                }
+
+                catch{
+                    ColoredTextElement.style.color = this.#defaultColor;
+                }
+                //записываем цветной текст в переданый элемент
+                document.getElementById(ElementName).appendChild(ColoredTextElement);
+
+                if(text.length > ColoredText.length){
+                    let UncoloredTextElement = document.createElement('div');
+                    let UncoloredText = "";
+
+                    for(let i = ColoredText.length; i < text.length; i++){
+
+                        UncoloredText += text[i];
+
+                    }
+                    UncoloredTextElement.textContent = UncoloredText;
+                    UncoloredTextElement.style.color = this.#uncoloredColor;
+
+                    document.getElementById(ElementName).appendChild(UncoloredTextElement);
+                }
+                
+            }
+
+        }
+
+        class refueledMarker extends Marker{
+            refuel(){
+                this.percentInk = 100.0;
+            }
+            refuel(fuelQuntity){
+                if(fuelQuntity<=100.0 && fuelQuntity>=0.0)this.percentInk = fuelQuntity;
+                else this.percentInk = 100.0;
+            }
+        }
+    </script>
+
+    <script>
+        let Marker1 = new Marker();
+        function UseMarker(){
+            debugger;
+            
+            let markColor = document.getElementById("TextColor");
+            Marker1.setColor = markColor.value;
+            if(TextBox.value == "")return false;
+
+            else {
+                Marker1.print("Result",TextBox.value);
+                document.getElementById("markerPecent").innerText = `inks: ${Marker1.getPercent}%`;
+            }
+            
+        }
+    </script>
+    
+</body>
+</html>
