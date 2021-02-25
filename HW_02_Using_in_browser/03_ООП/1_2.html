@@ -12,11 +12,11 @@
         <input type="text" id="TextBox" width="200">
         <input type="color" id="TextColor" value="#FF0000">
         <input type="button" onclick="UseMarker()" width="50" value="Enter">
+        <input type="button" onclick="RefuelMarker()" width="70" value="Fuel marker">
     </div>
+    
     <div id="markerPecent"></div>
-    <div id="Result" >
-
-    </div> 
+    <div id="Result"></div> 
 
     <script>
 
@@ -90,15 +90,12 @@
             refuel(){
                 this.percentInk = 100.0;
             }
-            refuel(fuelQuntity){
-                if(fuelQuntity<=100.0 && fuelQuntity>=0.0)this.percentInk = fuelQuntity;
-                else this.percentInk = 100.0;
-            }
         }
     </script>
 
     <script>
-        let Marker1 = new Marker();
+        let Marker1 = new refueledMarker();
+
         function UseMarker(){
             debugger;
             
@@ -111,6 +108,11 @@
                 document.getElementById("markerPecent").innerText = `inks: ${Marker1.getPercent}%`;
             }
             
+        }
+
+        function RefuelMarker(){
+            Marker1.refuel();
+            document.getElementById("markerPecent").innerText = `inks: ${Marker1.getPercent}%`;
         }
     </script>
     

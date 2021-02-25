@@ -9,33 +9,33 @@
 <body>
 
     <div style="margin-bottom: 5px;">
-        <input name="Checkbox_Add_Element" type="checkbox" unchecked>
+        <input id="Checkbox_Add_Element" type="checkbox" unchecked>
         Добавить элемент в конец списка
-        <input name="Text_Add_Element" maxlength="30">
+        <input id="Text_Add_Element" type="text" maxlength="30">
     </div>
 
     <div style="margin-bottom: 5px;">
-        <input name="Checkbox_Insert_Element" type="checkbox" unchecked>
+        <input id="Checkbox_Insert_Element" type="checkbox" unchecked>
         Вствить элемент списка
-        <input name="Text_Insert_Element" maxlength="30">
+        <input id="Text_Insert_Element" type="text" maxlength="30">
     </div>
 
     <div style="margin-bottom: 5px;">
-        <input name="Checkbox_Edit_Element" type="checkbox" unchecked>
+        <input id="Checkbox_Edit_Element" type="checkbox" unchecked>
         Изменить текст элемента списка
-        <input name="Text_Edit_Element" maxlength="30">
+        <input id="Text_Edit_Element" type="text" maxlength="30">
     </div>
 
     <div style="margin-bottom: 5px;">
-        <input name="Checkbox_Add_List" type="checkbox" unchecked>
+        <input id="Checkbox_Add_List" type="checkbox" unchecked>
         Добавить вложеный список
-        <input name="Text_Add_List" maxlength="30">
+        <input id="Text_Add_List" type="text" maxlength="30">
     </div>
 
     <div style="margin-bottom: 5px;">
-        <input name="Checkbox_Delete_Element" type="checkbox" unchecked>
+        <input id="Checkbox_Delete_Element" type="checkbox" unchecked>
         Удалить элемент списка
-        <input name="Text_Delete_Element" maxlength="30">
+        <input id="Text_Delete_Element" type="text" maxlength="30">
     </div>
 
     <input type="button" onclick="add_NewList()" name="Button_Add_List" value="Добавить новый список" style="padding-right: 30px; padding-left: 30px;"></input>
@@ -54,7 +54,7 @@
         newList.id = ListsCount;
 
         let listName = document.createElement('li');
-        listName.textContent = Список${ListsCount};
+        listName.textContent = `Список${ListsCount}`;
 
         let firstElement = document.createElement('ul');
         firstElement.addEventListener('click',function(e){
@@ -64,7 +64,7 @@
 
         let firstElementChild = document.createElement('li');
         
-        firstElementChild.id = ${ListsCount}_1;
+        firstElementChild.id = `${ListsCount}_1`;
         firstElement.appendChild(firstElementChild);
         firstElementChild.value = "new list";
 
@@ -76,38 +76,27 @@
         ListsCount++;
     }
 
-    function add_Element(){
-
-    }
+    
 
      function Element_click(ElementName){
         debugger;
         console.log("click");
-        if (document.getElementsByName('Checkbox_Edit_Element')){
+        if (document.getElementById('Checkbox_Edit_Element').checked == true){
 
-            let textbox = document.getElementsByName('Text_Edit_Element');
-           
-            document.getElementById(`${ElementName}`).value =  textbox.value;
-            let element =  document.getElementById(ElementName);
-
+            document.getElementById(`${ElementName}`).innerText = document.getElementById("Text_Edit_Element").value;
             console.log("text changed");
         }
 
-        else if (document.getElementsByName('Checkbox_Add_Element') == true){
+        else if (document.getElementById('Checkbox_Add_Element').checked == true){
 
+            document.getElementById(ElementName).parentElement.appendChild
         } 
 
-        else if (document.getElementsByName('Checkbox_Insert_Element') == true){
+        else if (document.getElementById('Checkbox_Insert_Element').checked == true){
 
         }   
 
     }
-    function Edit_Element(){
-
-       
-        if(checkbox.checked == true){
-
-        }
-    }
+   
 </script>
 </html>
