@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1_2 using in browser</title>
+</head>
+<body>
+    <ol>
+        <li onclick="Highlight(event)">"The War of the Worlds" by Herbert George Wells</li>
+        <li onclick="Highlight(event)">"Metro 2033" by Dmitry Glyhowsky</li>
+        <li onclick="Highlight(event)">"Brave New World" by Aldous Huxley</li>
+        <li onclick="Highlight(event)">"The Chronicles of Amber" by Roger Zelazny</li>
+        <li onclick="Highlight(event)">"Wiedźmin: Chrzest ognia" by Andrzej Sapkowski</li>
+        <li onclick="Highlight(event)">"Wiedźmin: Wieża Jaskółki" by Andrzej Sapkowski</li>
+    </ol>
+
+    <script>
+        let highlightedElemets = [];//выделенные элементы
+
+        function Highlight(event){
+
+            debugger;
+            //проверка на нажатый shift
+            if(event.shiftKey == true){
+
+                highlightedElemets.push(event.target);
+
+            }
+
+            else{
+                highlightedElemets.splice(0,highlightedElemets.length);
+            } 
+
+            //перебор элементов списка
+            if(event.target.parentElement.childNodes[1] != null){
+
+                let elems =  event.target.parentElement.childNodes;
+
+                for(let i = 0; i < elems.length; i++){
+
+                    
+                    if (elems[i].nodeName.toLowerCase() == 'li'){
+                        let isHighlited = false;
+                        if(highlightedElemets.length != 0){
+
+                            for(let j = 0; j < highlightedElemets.length && isHighlited != true; j++){
+
+                                if (elems[i] == highlightedElemets[j]){
+
+                                    isHighlited = true;
+                                } 
+                            }
+                        }
+                        
+                        if(isHighlited == false) elems[i].style.backgroundColor = document.body.style.backgroundColor;
+                        else elems[i].style.backgroundColor = "#f5885d";
+                    } 
+
+                }
+            }
+            
+            event.target.style.backgroundColor = "#f5885d";
+
+        }
+    </script>
+</body>
+</html>

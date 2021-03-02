@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1_1 using in browser</title>
+</head>
+<body>
+    <ul>
+        <li onmouseover="highlight(this)" onmouseout="unlight(this)">This PC
+            <ul>
+                <li onmouseover="highlight(this)" onclick="OnClick(this)" onmouseout="unlight(this)">Local Disc (C:)
+                    <ul>
+                        <li onmouseover="highlight(this)"  onmouseout="unlight(this)">Program Files</li>
+                        <li onmouseover="highlight(this)"  onmouseout="unlight(this)">Users</li>
+                        <li onmouseover="highlight(this)"  onmouseout="unlight(this)">Windows</li>
+                    </ul>
+                </li>
+
+                <li onmouseover="highlight(this)" onclick="OnClick(this)" onmouseout="unlight(this)">Local Disk (D:)
+                    <ul>
+                        <li onmouseover="highlight(this)"  onmouseout="unlight(this)">New Folder 1</li>
+                        <li onmouseover="highlight(this)"  onmouseout="unlight(this)">New Folder 2</li>
+                        <li onmouseover="highlight(this)"  onmouseout="unlight(this)">New Folder 3</li>
+                    </ul>
+                </li>
+
+                <li onmouseover="highlight(this)" onclick="OnClick(this)" onmouseout="unlight(this)">Local Disk (E:)</li>
+            </ul>
+        </li>
+    </ul>
+    <div>Some text</div>
+
+    <script>
+        
+        function highlight(element){
+            debugger;
+            element.style.fontWeight = "900";
+
+            if( element.childNodes[1] != null){
+
+                let elems =  element.childNodes[1].childNodes;
+
+                for(let i = 0; i < elems.length; i++){
+
+                  if (elems[i].nodeName.toLowerCase() == 'li') elems[i].style.fontWeight = "normal";
+                }
+            }
+            event.stopPropagation();
+           
+            //element.childNodes[0].style.fontWeight = "normal";
+        }
+        function unlight(element){
+            
+            element.style.fontWeight = "normal";
+        }
+
+        function OnClick(element){
+            
+            Child = element.childNodes[1];
+
+           if(Child.style.display != "none"){
+             Child.style.display = "none";
+             isClicked = true;
+           } 
+
+           else{
+             Child.style.display = "block";
+             isClicked = false;
+           }
+        }
+    </script>
+</body>
+</html>
