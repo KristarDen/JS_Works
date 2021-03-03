@@ -29,9 +29,11 @@
     </table>
     
     <script>
-        debugger;
+       
         let Today = new Date(Date.now());
         let FirstDayOfMounth = new Date(Today.getFullYear(),Today.getMonth(),"01");
+        let NextMounth = new Date(FirstDayOfMounth.getFullYear(), FirstDayOfMounth.getMonth()+1, "01");
+        let DayQuantity = Math.round((NextMounth - FirstDayOfMounth) / 1000 / 3600 / 24);
 
        
         let index = 1;
@@ -40,17 +42,55 @@
             let NewRow = document.createElement("tr");
             NewRow.tagName = `${i}`;
             for(let j = 0; j < 7 ; j++){
-
+                
+                let NewCell = document.createElement("td");
                 if(i == 0){
-                    
+
+                    if( j == (FirstDayOfMounth.getDay() - 1) ){
+
+                        NewCell.innerText = `${FirstDayOfMounth.getDate()}`;
+                        FirstDayOfMounth.setDate(FirstDayOfMounth.getDate() + 1);
+                        index++;
+                    }
+                    else if(j == 6 && FirstDayOfMounth.getDay() == 0){
+
+                        NewCell.innerText = `${FirstDayOfMounth.getDate()}`;
+                        FirstDayOfMounth.setDate(FirstDayOfMounth.getDate() + 1);
+                    }
+
+                    else{
+                        NewCell.innerText = "  ";
+                    }
+
                 }
 
-                let NewCell = document.createElement("td");
-                NewCell.tagName = `${i}_${j}`;
-                NewCell.innerText = `${index}`;
-                NewRow.appendChild(NewCell);
+                else{
 
-                index++;
+                    if(index  < DayQuantity){
+
+                        NewCell.innerText = `${FirstDayOfMounth.getDate()}`;
+                        FirstDayOfMounth.setDate (FirstDayOfMounth.getDate() + 1);
+                        index++;
+                    }
+                    else{
+                        NewCell.innerText = "  ";
+                    }
+                    
+                }
+                
+                
+                if( (Today.getDate()+1) == index){
+                    debugger;
+                    NewCell.style.backgroundColor = "#FFC300";
+                }
+
+                if(FirstDayOfMounth.getDay() == 0 || FirstDayOfMounth.getDay() == 1){
+                    NewCell.style.color = "#FF3333";
+                }
+                NewCell.style.border = "1px solid black";
+                NewCell.tagName = `${i}_${j}`;
+
+                NewRow.appendChild(NewCell);
             }
            // Calendar.appendChild(NewRow);
            //document.getElementByName("Calendar").appendChild(NewRow);
@@ -58,6 +98,15 @@
         }
         document.getElementById("Calendar").style.backgroundImage = "url(Abstract.jpg)";
         document.getElementById("Calendar").style.backgroundSize = "contain";
+
+        function ApendDay()
+        {
+             
+            NewCell.tagName = `${i}_${j}`;
+            NewCell.innerText = `${FirstDayOfMounth.getDate()}`;
+             
+            FirstDayOfMounth.setDate(FirstDayOfMounth.getDate() + 1);
+        }
     </script>
 </body>
 </html>
