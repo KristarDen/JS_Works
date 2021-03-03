@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calendar</title>
+    <style>
+        body{
+            font-size: 26pt;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+    </style>
+</head>
+<body>
+    <table id="Calendar" style="border: 1px solid black;">
+        <tbody>
+            <th id="Week_Days" >
+                <tr>Пн</tr>
+                <tr>Вт</tr>
+                <tr>Ср</tr>
+                <tr>Чт</tr>
+                <tr>Пт</tr>
+                <tr>Сб</tr>
+                <tr>Вс</tr>
+            </th>
+        </tbody>
+        
+    </table>
+    
+    <script>
+       
+        let Today = new Date(Date.now());
+        let FirstDayOfMounth = new Date(Today.getFullYear(),Today.getMonth(),"01");
+        let NextMounth = new Date(FirstDayOfMounth.getFullYear(), FirstDayOfMounth.getMonth()+1, "01");
+        let DayQuantity = Math.round((NextMounth - FirstDayOfMounth) / 1000 / 3600 / 24);
+
+       
+       
+        let index = 1;
+        for(let i = 0; i < 5 ; i++){
+
+            let NewRow = document.createElement("tr");
+            NewRow.tagName = `${i}`;
+            for(let j = 0; j < 7 ; j++){
+                
+                let NewCell = document.createElement("td");
+                if(i == 0){
+
+                    if( j == (FirstDayOfMounth.getDay() - 1) ){
+
+                        NewCell.innerText = `${FirstDayOfMounth.getDate()}`;
+                        FirstDayOfMounth.setDate(FirstDayOfMounth.getDate() + 1);
+                        index++;
+                    }
+                    else if(j == 6 && FirstDayOfMounth.getDay() == 0){
+
+                        NewCell.innerText = `${FirstDayOfMounth.getDate()}`;
+                        FirstDayOfMounth.setDate(FirstDayOfMounth.getDate() + 1);
+                    }
+
+                    else{
+                        NewCell.innerText = "  ";
+                    }
+
+                }
+
+                else{
+
+                    if(index  < DayQuantity){
+
+                        NewCell.innerText = `${FirstDayOfMounth.getDate()}`;
+                        FirstDayOfMounth.setDate (FirstDayOfMounth.getDate() + 1);
+                        index++;
+                    }
+                    else{
+                        NewCell.innerText = "  ";
+                    }
+                    
+                }
+                
+                
+                if( (Today.getDate()+1) == index){
+                    debugger;
+                    NewCell.style.backgroundColor = "#FFC300";
+                }
+
+                if(FirstDayOfMounth.getDay() == 0 || FirstDayOfMounth.getDay() == 1){
+                    NewCell.style.color = "#FF3333";
+                }
+                NewCell.style.border = "1px solid black";
+                NewCell.tagName = `${i}_${j}`;
+
+                NewRow.appendChild(NewCell);
+            }
+           // Calendar.appendChild(NewRow);
+           //document.getElementByName("Calendar").appendChild(NewRow);
+           document.getElementById("Calendar").appendChild(NewRow);
+        }
+
+        document.getElementById("Calendar").style.backgroundImage = "url(Abstract.jpg)";
+        document.getElementById("Calendar").style.backgroundSize = "contain";
+
+        
+    </script>
+</body>
+</html>
