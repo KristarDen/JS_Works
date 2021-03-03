@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3_1</title>
+</head>
+<body style="background-color: #fbf2e9;">
+    <label style="display: flex;">Press Ctrl+E for edit text</label>
+    <label style="display: flex;">Press Ctrl+S for save text</label>
+    <hr>
+
+    <div name="TextBox" onkeydown="Edit(event)" style="display: flex;">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed et nunc sit amet est molestie lacinia. 
+        Fusce interdum orci non ornare volutpat. In hac habitasse platea dictumst. 
+        Proin vel dictum nisi, vitae tempor ex. Phasellus bibendum libero eget massa ultricies volutpat. 
+        Fusce sit amet tincidunt libero. Fusce gravida quam eu dui vestibulum, ac blandit augue pretium. 
+        Ut neque odio, iaculis nec tellus a, cursus egestas tellus. 
+        Ut et lorem vel massa ornare venenatis sit amet et nulla.
+    </div>
+    <input name="EditBox" onkeydown="Save(event)" style="display: none;" type="text">
+
+    <script>
+        function Edit(event){
+            debugger;
+            //let textBox = event.target;
+            if(event.shiftKey && event.keyCode == 69){
+
+                TextBox.style.display = "none";
+                EditBox.style.display = "flex";
+                EditBox.value = TextBox.innerText;
+
+            }
+        }
+
+        function Save(event){
+            debugger;
+            if(event.shiftKey && event.keyCode == 83){
+
+                TextBox.style.display = "flex";
+                EditBox.style.display = "none";
+
+                TextBox.innerText = EditBox.value;
+            }
+        }
+    </script>
+
+</body>
+</html>

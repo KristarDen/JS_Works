@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2_1</title>
+</head>
+<body>
+    <div style="background-color:bisque; width: 300px; padding: 5px;">
+        <label style="display: block;">Enter your name (name can`t contain digits)</label>
+        <input type="text" oninput="ChekInput(event)">
+    </div>
+
+    <script>
+        function ChekInput(event){
+            debugger;
+            let Text = event.target.value;
+            let bannedSymbols = "0123456789";
+            if(bannedSymbols.indexOf(Text) != -1){
+
+                if(Text.length == 1) {
+                    event.target.value = "";
+                }
+
+                else{
+
+                    let result = "";
+
+                     for(let i = 0; i < (Text-1); i++){
+                        result += Text[i];
+                    }
+                    event.target.value = result;
+                }
+               
+            }
+        }
+    </script>
+</body>
+</html>
