@@ -6,16 +6,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Calendar</title>
     <style>
-        .WorkDay{
-            background-color:darkgoldenrod;
-
+        body{
+            font-size: 26pt;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
+        
     </style>
 </head>
 <body>
     <table id="Calendar" style="border: 1px solid black;">
         <tbody>
-            <th id="Week_Days">
+            <th id="Week_Days" >
                 <tr>Пн</tr>
                 <tr>Вт</tr>
                 <tr>Ср</tr>
@@ -35,6 +36,7 @@
         let NextMounth = new Date(FirstDayOfMounth.getFullYear(), FirstDayOfMounth.getMonth()+1, "01");
         let DayQuantity = Math.round((NextMounth - FirstDayOfMounth) / 1000 / 3600 / 24);
 
+       
        
         let index = 1;
         for(let i = 0; i < 5 ; i++){
@@ -96,17 +98,11 @@
            //document.getElementByName("Calendar").appendChild(NewRow);
            document.getElementById("Calendar").appendChild(NewRow);
         }
+
         document.getElementById("Calendar").style.backgroundImage = "url(Abstract.jpg)";
         document.getElementById("Calendar").style.backgroundSize = "contain";
 
-        function ApendDay()
-        {
-             
-            NewCell.tagName = `${i}_${j}`;
-            NewCell.innerText = `${FirstDayOfMounth.getDate()}`;
-             
-            FirstDayOfMounth.setDate(FirstDayOfMounth.getDate() + 1);
-        }
+        
     </script>
 </body>
 </html>
