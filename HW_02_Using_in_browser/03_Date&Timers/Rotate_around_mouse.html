@@ -6,18 +6,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
-<body onmousemove="Rotate(event)" style="width: 600px; height: 600px;">
-    <div id="1" style="background-color: lightcoral; width: 30px; height: 30px; display: flexbox;"></div>
+<body onmousemove="CoordUpd(event)" style="width: 600px; height: 600px;">
+    <div id="1" style="position: fixed; background-color: lightcoral; width: 30px; height: 30px; display: flexbox;"></div>
 </body>
 
 <script>
     let rotate = 90;
-    function Rotate(event){
-        document.getElementById("1").style.transformOrigin = `${event.pageX} ${event.pageY}`
+
+    let mouseX = 0;
+    let mouseY = 0;
+
+    let timer = setInterval(Roatate,10);
+    function CoordUpd(event){
+
+        mouseX = event.pageX;
+        mouseY = event.pageY;
+       /* document.getElementById("1").style.transformOrigin = `${event.pageX} ${event.pageY}`
+        document.getElementById("1").style.transform = 'rotate(' + rotate + 'deg)';
+        rotate+=10;*/
+    }
+
+    function Roatate(){
+        debugger;
+        document.getElementById("1").style.transformOrigin = `${mouseX}px ${mouseY}px`;
         document.getElementById("1").style.transform = 'rotate(' + rotate + 'deg)';
         rotate+=10;
-
-        
     }
 </script>
 
