@@ -5,8 +5,38 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Galery</title>
+    <style>
+        body{
+            background-image: url(BG.JPG);
+            background-repeat: repeat;
+        }
+        .ImgElement{
+            border: rgb(93, 94, 128) 5px ridge ;
+            
+        }
+    </style>
 </head>
 <body>
-    <script>document.cookie = "Some info"</script>
+    <div>
+        <img src="TITLE.JPG">
+    </div>
+    <div>
+        <img onclick="OpenPick(event)" class="ImgElement" id="P0" src="SMALL/P0.JPG">
+        <img onclick="OpenPick(event)" class="ImgElement" id="P1" src="SMALL/P1.JPG">
+        <img onclick="OpenPick(event)" class="ImgElement" id="P2" src="SMALL/P2.JPG">
+        <img onclick="OpenPick(event)" class="ImgElement" id="P3" src="SMALL/P3.JPG">
+        <img onclick="OpenPick(event)" class="ImgElement" id="P4" src="SMALL/P4.JPG">
+        <img onclick="OpenPick(event)" class="ImgElement" id="P5" src="SMALL/P5.JPG">
+        <img onclick="OpenPick(event)" class="ImgElement" id="P6" src="SMALL/P6.JPG">
+    </div>
+    
+    <script>
+        function OpenPick(event){
+            let win = window.open();
+            let PickId = event.target.id;
+            win.document.write(`<title>Galery ${PickId}</title>`);
+            win.document.write(`<img src="BIG/${PickId}.JPG">`);
+        }
+    </script>
 </body>
 </html>
