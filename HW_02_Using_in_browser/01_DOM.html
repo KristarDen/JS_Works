@@ -88,13 +88,47 @@
         }
 
         else if (document.getElementById('Checkbox_Add_Element').checked == true){
+            
+            let ParentId =  document.getElementById(`${ElementName}`).parentElement.parentElement.id;
+            let firstElement = document.createElement('ul');
 
-            document.getElementById(ElementName).parentElement.appendChild
+            firstElement.addEventListener('click',function(e){
+
+            let id = e.target.id;
+            Element_click(id);})
+
+            let firstElementChild = document.createElement('li');
+        
+            firstElementChild.id = `${ListsCount}_${ParentId}`;
+            firstElement.appendChild(firstElementChild);
+            firstElementChild.innerText =  document.getElementById("Text_Add_Element").value;
+
+            document.getElementById(ElementName).parentElement.parentElement.appendChild(firstElement);
+            ListsCount++;
         } 
 
         else if (document.getElementById('Checkbox_Insert_Element').checked == true){
 
-        }   
+            let ParentId =  document.getElementById(`${ElementName}`).parentElement.parentElement.id;
+            let firstElement = document.createElement('ul');
+
+            firstElement.addEventListener('click',function(e){
+
+            let id = e.target.id;
+            Element_click(id);})
+
+            let firstElementChild = document.createElement('li');
+        
+            firstElementChild.id = `${ListsCount}_${ParentId}`;
+            firstElement.appendChild(firstElementChild);
+            firstElementChild.innerText =  document.getElementById("Text_Insert_Element").value;
+            ListsCount++;
+
+            document.getElementById(`${ElementName}`).parentElement.parentElement.insertBefore(firstElement ,document.getElementById(`${ElementName}`).parentElement);
+        } 
+        else if (document.getElementById('Checkbox_Delete_Element').checked == true){
+            document.getElementById(`${ElementName}`).parentElement.remove();
+        }  
 
     }
    
