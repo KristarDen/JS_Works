@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>01</title>
+    <style>
+        body{
+            background-color: rgb(255, 234, 216);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        .bordered{
+            border: 1px solid black;
+            display: flexbox;
+            width: 45px;
+        }
+    </style>
+</head>
+<body>
+    
+    <form name="ChooseTicket">
+        <div style="margin-bottom: 10px;">
+            Direction :
+            <select name="Distination">
+                <option disabled>Выберите направление</option>
+                <option value="Одесса-Киев">Одесса-Киев</option>
+                <option value="Одесса-Уганда">Одесса-Уганда</option>
+                <option value="Одесса-Львов">Одесса-Львов</option>
+            </select>
+
+            Date :
+            <input name="TicketDate" type="date">
+
+            <button onclick="addTicket()">Search</button>
+        </div>
+
+    </form>
+
+    <script>
+        let Tickets = [];
+        let even = document.createElement("div");
+        let odd = document.createElement("div");
+
+        for(let i = 0; i < 28; i++){
+
+            let newspan = document.createElement("span");
+
+            let newCheckbox = document.createElement("input");
+            newCheckbox.type = "checkbox";
+            newCheckbox.id = `${i}`;
+
+            let newText = document.createElement("span");
+            newText.innerText = `${i + 1}`;
+
+            newspan.appendChild(newCheckbox);
+            newspan.appendChild(newText);
+            newspan.className = "bordered";
+
+            if( i % 2 != 0 ){
+                odd.appendChild(newspan);
+            }
+
+            else{
+                even.appendChild(newspan);
+            }
+        }
+
+        ChooseTicket.appendChild(even);
+        ChooseTicket.appendChild(odd);
+
+        
+
+
+        function addTicket(){
+            let date = TicketDate.value;
+            let dir = Distination.options[Distination.selectedIndex];
+            let seat ;
+
+            let CheckNods = ChooseTicket.querySelectorAll("span");
+
+            for (let i = 0; i < CheckNods.length; i++) {
+                if (CheckNods[i].firstChild.checked == true){
+                    seat = parseInt(CheckNods[i].firstChild.id);
+                    break;
+                }
+                
+            }
+
+            let newTicket = Ticket()
+        }
+    </script>
+
+    <script>
+        class Ticket{
+            #Direction = "";
+            #Date = "";
+            #Seat = 0;
+
+            constructor(dir,date,seat){
+                this.SetDirection(dir);
+                this.SetDate(date);
+                this.SetSeat(seat);
+            }
+
+            get GetDirection(){
+                return Direction;
+            }
+            set SetDirection(value){
+                if (value == "") return false;
+                else Direction = value;
+            }
+
+            get GetDate(){
+                return this.#Date;
+            }
+            set SetDate(value){
+                if(value < Date.now()) return false;
+                else this.#Date = value;
+            }
+
+            get GetSeat(){
+                return Seat;
+            }
+            set SetSeat(value){
+                if(value < 0 ||value >28) return false;
+                else this.#Seat;
+            }
+        }
+    </script>
+
+</body>
+</html>
