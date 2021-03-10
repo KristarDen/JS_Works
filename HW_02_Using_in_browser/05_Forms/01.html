@@ -44,18 +44,23 @@
             <button onclick="addTicket()">Search</button>
         </div>
 
-    </form>
+    </div>
+
     <div>My Tickets</div>
-    <table id="TicketsTable">
-        <tr style="border: 1px solid black;">
-            <th>Direction</th>
-            <th>Date</th>
-            <th>Seat</th>
-        </tr>
+    <div>
+        <table id="TicketsTable">
+            <tr style="border: 1px solid black;">
+                <th>Direction</th>
+                <th>Date</th>
+                <th>Seat</th>
+            </tr>
        
-    </table>
+        </table>
+        <label id="CoastLabel"></label>
+    </div>
 
     <script>
+        let TotalCoast = 0;
         let Tickets = [];
         let even = document.createElement("div");
         let odd = document.createElement("div");
@@ -84,8 +89,9 @@
             }
         }
         even.style.marginBottom = "5px";
-        ChooseTicket.appendChild(even);
-        ChooseTicket.appendChild(odd);
+        
+        document.getElementById("ChooseTicket").appendChild(even);
+        document.getElementById("ChooseTicket").appendChild(odd);
 
         
 
@@ -93,15 +99,28 @@
         function addTicket(){
             debugger;
             let date = document.getElementById("TicketDate").value;
-            let dir = document.getElementById("Distination").options[Distination.selectedIndex];
+            let dir = document.getElementById("Distination").options[Distination.selectedIndex].innerText;
             let seats ="";
 
             let CheckNods = document.getElementById("ChooseTicket").querySelectorAll("span");
 
             for (let i = 0; i < CheckNods.length; i++) {
                 if (CheckNods[i].firstChild.checked == true){
-                    seats += (CheckNods[i].firstChild.id) + " "; 
-                    break;
+
+                    if(seats == ""){
+                        let id = parseInt(CheckNods[i].firstChild.id);
+                        id += 1;
+                        seats += "" + id;
+                        TotalCoast += 62;
+                    }
+                    else{
+                        let id = parseInt(CheckNods[i].firstChild.id);
+                        id += 1;
+                        seats += "," + id;
+                        TotalCoast += 62;
+                    }
+                    
+
                 }
                 
             }
@@ -114,6 +133,11 @@
             dirTH.innerText = dir;
             seatTH.innerText = seats;
 
+            TR.appendChild(dateTH);
+            TR.appendChild(dirTH);
+            TR.appendChild(seatTH);
+            document.getElementById("TicketsTable").appendChild(TR);
+            document.getElementById("CoastLabel").innerText = `Total coast: ${TotalCoast}$`;
             let newTicket = new Ticket(date,dir,seats);
             Tickets.push(newTicket);
         }
@@ -123,12 +147,12 @@
         class Ticket{
             #Direction = "";
             #Date = "";
-            #Seat = 0;
+            #Seat = "";
 
             constructor(dir,date,seat){
-                this.SetDirection(dir);
-                this.SetDate(date);
-                this.SetSeat(seat);
+                this.SetDirection = dir;
+                this.SetDate = date;
+                this.SetSeat = seat;
             }
 
             get GetDirection(){
@@ -136,7 +160,7 @@
             }
             set SetDirection(value){
                 if (value == "") return false;
-                else Direction = value;
+                else this.#Direction = value;
             }
 
             get GetDate(){
@@ -151,8 +175,8 @@
                 return Seat;
             }
             set SetSeat(value){
-                if(value < 0 ||value >28) return false;
-                else this.#Seat;
+                if(value == "") return false;
+                else this.#Seat = value;
             }
         }
     </script>
