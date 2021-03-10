@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>02_1</title>
+    <style>
+        label{
+            text-align: left;
+            align-self:center;
+        }
+        .container{
+            padding: 5px;
+            width: 300px;
+            height: 25px;
+            margin-bottom: 10px; 
+            border: 1px solid black;
+            border-radius: 3px;
+        }
+        .left{
+           float: right;
+        }
+        body{
+            width: 300px;
+            display: flex;
+            flex-direction: column;
+        }
+    </style>
+</head>
+<body>
+    <label style="margin-bottom: 10px;">Регистрация</label>
+
+    <div class="container">
+        <label>Логин:</label>
+        <input class="left" id="Login" type="text">
+    </div>
+
+    <div class="container">
+        <label>Пароль:</label>
+        <input class="left" id="Password" type="text">
+    </div>
+
+    <div class="container">
+        <label>Подтверждение:</label>
+        <input class="left" id="PassConfirm" type="text">
+    </div>
+
+    <div class="container">
+        <label>Полное имя:</label>
+        <input class="left" id="FullName" type="text">
+    </div>
+
+    <div style="margin-bottom: 10px; border: 1px solid black;">
+        <label>Пол:</label>
+        <div id="Genders" style="display: flexbox; flex-direction: column;">
+            <div>
+                <input onclick="GenderChoose(event)" type="checkbox" id="Male_Gender">
+                <label>М</label>
+            </div>
+            <div>
+                <input onclick="GenderChoose(event)" type="checkbox" id="Female_Gender">
+                <label>Ж</label>
+            </div>
+        </div>
+    </div>
+
+    <div style="margin-bottom: 10px; border: 1px solid black;">
+        <label>Специализация</label>
+        <div id="Specs" style="display: flexbox; flex-direction: column;">
+
+            <div>
+                <input onclick="SpecChoose(event)" type="checkbox" id="spec_Disign">
+                <label>Дизайн</label>
+            </div>
+
+            <div>
+                <input onclick="SpecChoose(event)" type="checkbox" id="spec_Programming">
+                <label>Программирование</label>
+            </div>
+
+            <div>
+                <input onclick="SpecChoose(event)" type="checkbox" id="spec_Administation">
+                <label>Администрирование</label>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="container">
+        <label>Должность</label>
+        <select id="Positions">
+            <option disabled selected>----------Выберите----------</option>
+            <option>Директор</option>
+            <option>Заместитель директора</option>
+            <option>Начальник отдела</option>
+            <option>Начальник отдела</option>
+            <option>Программист</option>
+            <option>Дизайнер</option>
+            <option>Консультант</option>
+            <option>Служащий</option>
+        </select>
+    </div>
+
+    <div style="width: 310px; float: left; border-bottom: 1px solid black; margin-bottom: 10px;"> </div>
+
+    <div>
+        <button>Регистрация</button>
+        <button>Сброс</button>
+    </div>
+
+    <script>
+        function checkLogin(){
+
+            let log = document.getElementById("Login"); 
+
+            if(log.value != "" && log.value != " ") return true;
+            else return false
+        }
+        
+        function checkPasswords(){
+
+            let pass = document.getElementById("Password").value;
+            let Checkpass = document.getElementById("PassConfirm").value;
+
+            if (pass.length < 3 && pass.length > 10) return false;
+
+            if (pass == Checkpass) return false;
+            else return true;
+        }
+
+        function checkName(){
+
+            let name = document.getElementById("FullName"); 
+
+            if(name.value != "" && name.value != " ") return true;
+            else return false;
+        }
+
+        function SpecChoose(event){
+            let CheckBox = document.getElementById("Specs").querySelectorAll("input");
+
+            CheckBox.forEach(element => element.checked = false);
+
+            event.target.checked = true;
+        }
+
+        function GenderChoose(event){
+            let CheckBox = document.getElementById("Genders").querySelectorAll("input");
+
+            CheckBox.forEach(element => element.checked = false);
+
+            event.target.checked = true;
+        }
+
+        function IsPositionSelected(){
+            if(document.getElementById("Positions").selectedIndex != 0) return true;
+            else return true;
+        }
+    </script>
+</body>
+</html>
