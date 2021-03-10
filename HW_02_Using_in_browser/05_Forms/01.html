@@ -15,14 +15,23 @@
             display: flexbox;
             width: 45px;
         }
+        table{
+            border-spacing: 0px;
+        }
+        th{
+            border: 1px solid black;
+            
+            margin: 0px;
+            
+        }
     </style>
 </head>
 <body>
     
-    <form name="ChooseTicket">
+    <div id="ChooseTicket">
         <div style="margin-bottom: 10px;">
             Direction :
-            <select name="Distination">
+            <select id="Distination">
                 <option disabled>Выберите направление</option>
                 <option value="Одесса-Киев">Одесса-Киев</option>
                 <option value="Одесса-Уганда">Одесса-Уганда</option>
@@ -30,12 +39,21 @@
             </select>
 
             Date :
-            <input name="TicketDate" type="date">
+            <input id="TicketDate" type="date">
 
             <button onclick="addTicket()">Search</button>
         </div>
 
     </form>
+    <div>My Tickets</div>
+    <table id="TicketsTable">
+        <tr style="border: 1px solid black;">
+            <th>Direction</th>
+            <th>Date</th>
+            <th>Seat</th>
+        </tr>
+       
+    </table>
 
     <script>
         let Tickets = [];
@@ -65,7 +83,7 @@
                 even.appendChild(newspan);
             }
         }
-
+        even.style.marginBottom = "5px";
         ChooseTicket.appendChild(even);
         ChooseTicket.appendChild(odd);
 
@@ -73,21 +91,31 @@
 
 
         function addTicket(){
-            let date = TicketDate.value;
-            let dir = Distination.options[Distination.selectedIndex];
-            let seat ;
+            debugger;
+            let date = document.getElementById("TicketDate").value;
+            let dir = document.getElementById("Distination").options[Distination.selectedIndex];
+            let seats ="";
 
-            let CheckNods = ChooseTicket.querySelectorAll("span");
+            let CheckNods = document.getElementById("ChooseTicket").querySelectorAll("span");
 
             for (let i = 0; i < CheckNods.length; i++) {
                 if (CheckNods[i].firstChild.checked == true){
-                    seat = parseInt(CheckNods[i].firstChild.id);
+                    seats += (CheckNods[i].firstChild.id) + " "; 
                     break;
                 }
                 
             }
+            let TR = document.createElement("tr");
+            let dateTH = document.createElement("th");
+            let dirTH = document.createElement("th");
+            let seatTH = document.createElement("th");
 
-            let newTicket = Ticket()
+            dateTH.innerText = date;
+            dirTH.innerText = dir;
+            seatTH.innerText = seats;
+
+            let newTicket = new Ticket(date,dir,seats);
+            Tickets.push(newTicket);
         }
     </script>
 
