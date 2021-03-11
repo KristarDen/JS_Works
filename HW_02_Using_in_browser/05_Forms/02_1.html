@@ -105,11 +105,17 @@
     <div style="width: 310px; float: left; border-bottom: 1px solid black; margin-bottom: 10px;"> </div>
 
     <div>
-        <button>Регистрация</button>
+        <button onclick="Registration()">Регистрация</button>
         <button>Сброс</button>
     </div>
 
     <script>
+        let GenderSelected = false;
+        let SpecSelected = false;
+        let Gender_Name = "";
+        let Spec_Name = "";
+        let Position_Name = "";
+
         function checkLogin(){
 
             let log = document.getElementById("Login"); 
@@ -119,14 +125,14 @@
         }
         
         function checkPasswords(){
-
+            debugger;
             let pass = document.getElementById("Password").value;
             let Checkpass = document.getElementById("PassConfirm").value;
 
-            if (pass.length < 3 && pass.length > 10) return false;
+            if (pass.length < 3 && pass.length > 10) return 0;
 
-            if (pass == Checkpass) return false;
-            else return true;
+            if (pass == Checkpass) return true;
+            else return -1;
         }
 
         function checkName(){
@@ -143,6 +149,11 @@
             CheckBox.forEach(element => element.checked = false);
 
             event.target.checked = true;
+            SpecSelected = true;
+
+            if(event.target.id == "spec_Disign")Spec_Name = "Дизайн";
+            else if(event.target.id == "spec_Programming")Spec_Name = "Программирование";
+            else if(event.target.id == "spec_Administation")Spec_Name = "Администрирование";
         }
 
         function GenderChoose(event){
@@ -151,12 +162,92 @@
             CheckBox.forEach(element => element.checked = false);
 
             event.target.checked = true;
+            GenderSelected = true;
+
+            if(event.target.id == "Male_Gender")Gender_Name = "Мужской";
+            else Gender_Name = "Женский";
         }
 
         function IsPositionSelected(){
-            if(document.getElementById("Positions").selectedIndex != 0) return true;
-            else return true;
+
+            if(document.getElementById("Positions").selectedIndex != 0){
+
+                Position_Name = document.getElementById("Positions").options[document.getElementById("Positions").selectedIndex].innerText;
+                return true;
+            } 
+
+            else return false;
+            
         }
+
+        function Registration(){
+
+            let isError = false;
+            let ErrorMess = "";
+
+            if(checkLogin() == false){
+                ErrorMess += "Заполните логин\n";
+                isError = true;
+            }
+
+            if(checkName() == false){
+                ErrorMess += "Заполните Имя\n";
+                isError = true;
+            }
+
+            if(SpecSelected == false){
+                ErrorMess += "Выберите специализацию\n";
+                isError = true;
+            }
+
+            if(GenderSelected == false){
+                ErrorMess += "Укажите свой пол\n";
+                isError = true;
+            }
+            
+            if(checkPasswords() == 0){
+                ErrorMess += "Пароль должен быть длиннее 3-х и короче 10 символов!\n";
+                isError = true;
+            }
+
+            if(checkPasswords() == -1){
+                ErrorMess += "Пароли не совпадают!\n";
+                isError = true;
+            }
+
+            if(IsPositionSelected() == false){
+                ErrorMess += "Выберете должность!\n";
+                isError = true;
+            }
+
+            if(isError == true){
+                alert("Ошибка\n" + ErrorMess);
+            }
+
+            else{
+                let win = window.open();
+
+                let Table = win.document.createElement("table");
+                Table.border = "1";
+
+                let Login =  document.getElementById("Login").value;
+                Table.innerHTML += `<tr><th>Логин</th><th>${Login}</th><tr>`;
+                
+                let FullName = document.getElementById("FullName").value;
+                Table.innerHTML += `<tr><th>Полное имя</th><th>${FullName}</th><tr>`;
+
+                Table.innerHTML += `<tr><th>Пол</th><th>${Gender_Name}</th><tr>`;
+                
+                Table.innerHTML += `<tr><th>Специализация</th><th>${Spec_Name}</th><tr>`;
+
+                //let Position = document.getElementById("Positions").innerText;
+                Table.innerHTML += `<tr><th>Должность</th><th>${Position_Name}</th><tr>`;
+                win.document.body.appendChild(Table);
+            }
+
+        }
+
+        
     </script>
 </body>
 </html>
