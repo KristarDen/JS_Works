@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>02_2</title>
+    <style>
+        body{
+            display: flex;
+            flex-direction: column;
+            font-family: 'Courier New', Courier, monospace;
+            background-color: lightgrey;
+        }
+        input{
+
+            di
+        }
+    </style>
+</head>
+<body>
+    <div id="StartInfo">
+        <b>Тест по JavaScript</b>
+        <div>У вас есть 1 минута на прохождение теста</div>
+        <div>Введите ваше имя :</div>
+        <input type="text" id="Name">
+
+        <div style="margin-top: 10px;">
+            <button id="StartTest" onchange="startTest()">Начать тест</button>
+        </div>
+    </div>
+
+
+    <div id="Qustion1">
+        <div>Для чего можно использовать JavaScript?</div>
+
+        <input type="checkbox">Для создания самостоятельно иполняемой программы
+        <input type="checkbox">Для обработки событий на web-странице
+        <input type="checkbox">Для добавления динамики и 'интеллекта' в web-страницу
+        <input type="checkbox">все варианты верны
+    </div>
+
+
+    <script>
+        let currentQustions = 1;
+
+        function startTest(){
+            document.getElementById("StartInfo").style.display = "none";
+            document.getElementById("Qustion1").style.display = "block";
+        }
+
+    </script>
+</body>
+</html>
