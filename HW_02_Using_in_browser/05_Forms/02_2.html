@@ -12,9 +12,10 @@
             font-family: 'Courier New', Courier, monospace;
             background-color: lightgrey;
         }
-        input{
 
-            di
+        .container{
+
+            display: flex;
         }
     </style>
 </head>
@@ -25,28 +26,53 @@
         <div>Введите ваше имя :</div>
         <input type="text" id="Name">
 
-        <div style="margin-top: 10px;">
-            <button id="StartTest" onchange="startTest()">Начать тест</button>
+        <div style="margin-top: 10px">
+            <button id="StartTest" onclick="startTest()">Начать тест</button>
         </div>
     </div>
 
+    <div id="Qustions_Count" style="margin-bottom: 10px;"></div>
+    <div id="Qustion1" style="display: none;">
+        <div style="margin-bottom: 5px;">Для чего можно использовать JavaScript?</div>
 
-    <div id="Qustion1">
-        <div>Для чего можно использовать JavaScript?</div>
-
-        <input type="checkbox">Для создания самостоятельно иполняемой программы
-        <input type="checkbox">Для обработки событий на web-странице
-        <input type="checkbox">Для добавления динамики и 'интеллекта' в web-страницу
-        <input type="checkbox">все варианты верны
+        <div class="container"><input type="checkbox" onclick="CheckClick(event)">Для создания самостоятельно иполняемой программы</div>
+        <div class="container"><input type="checkbox" onclick="CheckClick(event)">Для обработки событий на web-странице</div>
+        <div class="container"><input type="checkbox" onclick="CheckClick(event)">Для добавления динамики и 'интеллекта' в web-страницу</div>
+        <div class="container"><input type="checkbox" onclick="CheckClick(event)">все варианты верны</div>
     </div>
 
 
+    <div id="Qustion2" style="display: none;">
+        <div style="margin-bottom: 5px;">Для чего можно использовать JavaScript?</div>
+
+        <div class="container"><input type="checkbox" onclick="CheckClick(event)">Для создания самостоятельно иполняемой программы</div>
+        <div class="container"><input type="checkbox" onclick="CheckClick(event)">Для обработки событий на web-странице</div>
+        <div class="container"><input type="checkbox" onclick="CheckClick(event)">Для добавления динамики и 'интеллекта' в web-страницу</div>
+        <div class="container"><input type="checkbox" onclick="CheckClick(event)">все варианты верны</div>
+    </div>
+
+    <button id="Reply" style="width: 100px; display: none;">Ответить</button>
+
     <script>
         let currentQustions = 1;
+        let qustionsQuantity = 3;
+
+        let UserName = document.getElementById("Name");
+
+        document.getElementById("Qustions_Count").innerText = `Вопросов ${currentQustions} из ${qustionsQuantity}`;
+
 
         function startTest(){
             document.getElementById("StartInfo").style.display = "none";
             document.getElementById("Qustion1").style.display = "block";
+        }
+
+        function CheckClick(event){
+            let CheckBox = document.getElementById(`Qustion${currentQustions}`).querySelectorAll("input");
+
+            CheckBox.forEach(element => element.checked = false);
+
+            event.target.checked = true;
         }
 
     </script>
