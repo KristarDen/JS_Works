@@ -43,21 +43,31 @@
 
 
     <div id="Qustion2" style="display: none;">
-        <div style="margin-bottom: 5px;">Для чего можно использовать JavaScript?</div>
+        <div style="margin-bottom: 5px;">Код JavaScript является ... ?</div>
 
-        <div class="container"><input type="checkbox" onclick="CheckClick(event)">Для создания самостоятельно иполняемой программы</div>
-        <div class="container"><input type="checkbox" onclick="CheckClick(event)">Для обработки событий на web-странице</div>
-        <div class="container"><input type="checkbox" onclick="CheckClick(event)">Для добавления динамики и 'интеллекта' в web-страницу</div>
-        <div class="container"><input type="checkbox" onclick="CheckClick(event)">все варианты верны</div>
+        <div class="container"><input type="checkbox" onclick="CheckClick(event)">интерпритируемым</div>
+        <div class="container"><input type="checkbox" onclick="CheckClick(event)">компилируемым</div>
+        
     </div>
 
-    <button id="Reply" style="width: 100px; display: none;">Ответить</button>
+    <div id="Qustion3" style="display: none;">
+        <div style="margin-bottom: 5px;">Может ли java scritp код браузера взаимодействовать с файловой системой компьютера?</div>
+
+        <div class="container"><input type="checkbox" onclick="CheckClick(event)">может</div>
+        <div class="container"><input type="checkbox" onclick="CheckClick(event)">не может</div>
+        
+    </div>
+
+    <button id="Reply" onclick="QustionReply()" style="width: 100px; display: none;">Ответить</button>
 
     <script>
+        let Qustions = ["все варианты верны","интерпритируемым","не может"];
         let currentQustions = 1;
         let qustionsQuantity = 3;
 
-        let UserName = document.getElementById("Name");
+        let rating = 0;
+        let answerText = "";
+        let UserName = document.getElementById("Name").innerText;
 
         document.getElementById("Qustions_Count").innerText = `Вопросов ${currentQustions} из ${qustionsQuantity}`;
 
@@ -65,14 +75,41 @@
         function startTest(){
             document.getElementById("StartInfo").style.display = "none";
             document.getElementById("Qustion1").style.display = "block";
+            document.getElementById("Reply").style.display = "block";
+        }
+
+        function QustionReply(){
+
+            if(currentQustions < qustionsQuantity+1){
+                
+                document.getElementById(`Qustion${currentQustions}`).style.display = "none";
+                debugger;
+                if( answerText == Qustions[currentQustions-1]){
+                    rating++;
+                }
+
+                currentQustions++;
+                document.getElementById(`Qustion${currentQustions}`).style.display = "block";
+
+                document.getElementById("Qustions_Count").innerText = `Вопросов ${currentQustions} из ${qustionsQuantity}`;
+
+                answerText = "";
+            }
+            else{
+                UserName = document.getElementById("Name").innerText;
+                alert(`Поздравляем ${UserName}!Тест сдан на ${rating}`);
+            }
+        
         }
 
         function CheckClick(event){
+            
             let CheckBox = document.getElementById(`Qustion${currentQustions}`).querySelectorAll("input");
 
             CheckBox.forEach(element => element.checked = false);
-
+            
             event.target.checked = true;
+            answerText = event.target.nextSibling.data;
         }
 
     </script>
