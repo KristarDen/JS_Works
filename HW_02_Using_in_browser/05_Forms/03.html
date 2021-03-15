@@ -30,7 +30,7 @@
         }
     </style>
 </head>
-<body>
+<body onload="LoadUsersCookies()">
     <div style="background-color: rgb(102, 102, 255); display: flex; justify-content: center;">
         <label style="margin-bottom: 10px; color: aliceblue; ">Регистрация</label>
     </div>
@@ -109,7 +109,7 @@
     <div style="width: 320px; float: left; border-bottom: 1px solid black; margin-bottom: 10px;"> </div>
 
     <div style="display: flex; justify-content: center;">
-        <button onclick="Registration()" style="margin: 10px;">Регистрация</button>
+        <button onclick="Registration()" style="margin: 10px;">Готово</button>
         <button style="margin: 10px;">Сброс</button>
     </div>
 
@@ -188,7 +188,7 @@
 
             let isError = false;
             let ErrorMess = "";
-
+            
             if(checkLogin() == false){
                 ErrorMess += "Заполните логин\n";
                 isError = true;
@@ -229,32 +229,21 @@
             }
 
             else{
-                /*let win = window.open();
-
-                let Table = win.document.createElement("table");
-                Table.border = "1";
 
                 let Login =  document.getElementById("Login").value;
-                Table.innerHTML += `<tr><th>Логин</th><th>${Login}</th><tr>`;
-                
-                let FullName = document.getElementById("FullName").value;
-                Table.innerHTML += `<tr><th>Полное имя</th><th>${FullName}</th><tr>`;
-
-                Table.innerHTML += `<tr><th>Пол</th><th>${Gender_Name}</th><tr>`;
-                
-                Table.innerHTML += `<tr><th>Специализация</th><th>${Spec_Name}</th><tr>`;
-
-                //let Position = document.getElementById("Positions").innerText;
-                Table.innerHTML += `<tr><th>Должность</th><th>${Position_Name}</th><tr>`;
-                win.document.body.appendChild(Table);*/
-                let Login =  document.getElementById("Login").value;
-                document.cookie = encodeURIComponent("Login") + '=' + encodeURIComponent(Login);
+                document.cookie = "Login" + '=' + Login + ";";
 
                 let FullName = document.getElementById("FullName").value;
-                document.cookie = encodeURIComponent("FullName") + '=' + encodeURIComponent(FullName);
+                document.cookie = "FullName" + '=' +  FullName + ";";
 
-               
-                document.cookie = encodeURIComponent("Gender") + '=' + encodeURIComponent(Gender_Name);
+                document.cookie =  "Gender" + '=' +  Gender_Name + ";";
+
+                let password = document.getElementById("Password").value;
+                document.cookie =  "Password" + '=' +  password + ";";
+
+                document.cookie =  "Positions" + '=' +  Position_Name + ";";
+                
+                document.cookie =  "Specialization" + '=' + Spec_Name + ";";
 
             }
 
@@ -263,4 +252,41 @@
         
     </script>
 </body>
+
+<script>
+    function LoadUsersCookies(){
+        document.getElementById("Login").value = getCookie("Login");
+
+        document.getElementById("FullName").value = getCookie("FullName");
+
+        document.getElementById("Password").value = getCookie("Password");
+        document.getElementById("PassConfirm").value = getCookie("Password");
+
+        let gender = getCookie("Gender");
+        if(gender == "Мужской") document.getElementById("Male_Gender").checked = true;
+        else document.getElementById("Female_Gender").checked = true;
+
+        let speclt = getCookie("Specialization");
+        if (speclt == "Дизайн") document.getElementById("spec_Disign").checked = true;
+        else if (speclt == "Программирование") document.getElementById("spec_Programming").checked = true;
+        else if (speclt == "Администрирование") document.getElementById("spec_Administation").checked = true;
+
+        debugger;
+        let postn = getCookie("Positions");
+        for(let i = 0; i < document.getElementById("Positions").options.length; i++){
+            let n = document.getElementById("Positions").options[i].innerText;
+            if (n == postn){
+                document.getElementById("Positions").selectedIndex = i;
+                break;
+            }
+        }
+    }
+
+    function getCookie(name) {
+        let matches = document.cookie.match(new RegExp(
+        "(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"));
+
+        return matches ? decodeURIComponent(matches[1]) : undefined;
+}
+</script>
 </html>
