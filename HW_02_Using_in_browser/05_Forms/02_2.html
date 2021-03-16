@@ -32,6 +32,7 @@
     </div>
 
     <div id="Qustions_Count" style="margin-bottom: 10px;"></div>
+    <div id="Timer" style="margin-bottom: 10px;">Осталось: 60 с</div>
     <div id="Qustion1" style="display: none;">
         <div style="margin-bottom: 5px;">Для чего можно использовать JavaScript?</div>
 
@@ -65,6 +66,10 @@
         let currentQustions = 1;
         let qustionsQuantity = 3;
 
+        let currentSeconds = 60;
+
+        let timerId;
+
         let rating = 0;
         let answerText = "";
         let UserName = document.getElementById("Name").innerText;
@@ -76,15 +81,16 @@
             document.getElementById("StartInfo").style.display = "none";
             document.getElementById("Qustion1").style.display = "block";
             document.getElementById("Reply").style.display = "block";
+            timerId = setTimeout(timerUpd(), 1);
         }
 
         function QustionReply(){
 
-            if(currentQustions < qustionsQuantity+1){
+            if(currentQustions < qustionsQuantity + 1){
                 
                 document.getElementById(`Qustion${currentQustions}`).style.display = "none";
                 debugger;
-                if( answerText == Qustions[currentQustions-1]){
+                if( answerText == Qustions[currentQustions - 1]){
                     rating++;
                 }
 
@@ -97,6 +103,7 @@
             }
             else{
                 UserName = document.getElementById("Name").innerText;
+                clearTimeout(timerId);
                 alert(`Поздравляем ${UserName}!Тест сдан на ${rating}`);
             }
         
@@ -110,6 +117,18 @@
             
             event.target.checked = true;
             answerText = event.target.nextSibling.data;
+        }
+
+        function timerUpd(){
+            debugger;
+            if(currentSeconds == 0){
+                UserName = document.getElementById("Name").innerText;
+                alert(`${UserName}ваше время вышло. Тест сдан на ${rating}`);
+                clearTimeout(timerId);
+            }
+            currentSeconds--;
+            document.getElementById("Timer").innerText = `Осталось: ${currentSeconds} c`;
+           
         }
 
     </script>
