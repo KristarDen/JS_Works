@@ -81,7 +81,7 @@
             document.getElementById("StartInfo").style.display = "none";
             document.getElementById("Qustion1").style.display = "block";
             document.getElementById("Reply").style.display = "block";
-            timerId = setTimeout(timerUpd(), 1);
+            timerId = setInterval(timerUpd, 1000);
         }
 
         function QustionReply(){
@@ -103,7 +103,7 @@
             }
             else{
                 UserName = document.getElementById("Name").innerText;
-                clearTimeout(timerId);
+                clearInterval(timerId);
                 alert(`Поздравляем ${UserName}!Тест сдан на ${rating}`);
             }
         
@@ -122,9 +122,10 @@
         function timerUpd(){
             debugger;
             if(currentSeconds == 0){
+                document.getElementById(`Qustion${currentQustions}`).style.display = "none";
                 UserName = document.getElementById("Name").innerText;
                 alert(`${UserName}ваше время вышло. Тест сдан на ${rating}`);
-                clearTimeout(timerId);
+                clearInterval(timerId);
             }
             currentSeconds--;
             document.getElementById("Timer").innerText = `Осталось: ${currentSeconds} c`;
