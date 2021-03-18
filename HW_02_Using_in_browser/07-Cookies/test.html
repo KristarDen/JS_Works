@@ -4,9 +4,148 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>test</title>
+    <title>02_2</title>
+    <style>
+        body{
+            display: flex;
+            flex-direction: column;
+            font-family: 'Courier New', Courier, monospace;
+            background-color: lightgrey;
+        }
+
+        .container{
+
+            display: flex;
+        }
+    </style>
 </head>
 <body>
-    
+    <div id="StartInfo">
+        <b>Тест по JavaScript</b>
+        <div>Введите ваше имя :</div>
+        <input type="text" id="Name">
+
+        <div style="margin-top: 10px">
+            <button id="StartTest" onclick="startTest()">Начать тест</button>
+        </div>
+    </div>
+
+    <div id="Qustions_Count" style="margin-bottom: 10px;"></div>
+
+    <div id="Qustion1" style="display: none;">
+        <div style="margin-bottom: 5px;">Для чего можно использовать JavaScript?</div>
+
+        <div class="container"><input type="checkbox" onclick="CheckClick(event)">Для создания самостоятельно иполняемой программы</div>
+        <div class="container"><input type="checkbox" onclick="CheckClick(event)">Для обработки событий на web-странице</div>
+        <div class="container"><input type="checkbox" onclick="CheckClick(event)">Для добавления динамики и 'интеллекта' в web-страницу</div>
+        <div class="container"><input type="checkbox" onclick="CheckClick(event)">все варианты верны</div>
+    </div>
+
+
+    <div id="Qustion2" style="display: none;">
+        <div style="margin-bottom: 5px;">Код JavaScript является ... ?</div>
+
+        <div class="container"><input type="checkbox" onclick="CheckClick(event)">интерпритируемым</div>
+        <div class="container"><input type="checkbox" onclick="CheckClick(event)">компилируемым</div>
+        
+    </div>
+
+    <div id="Qustion3" style="display: none;">
+        <div style="margin-bottom: 5px;">Может ли java scritp код браузера взаимодействовать с файловой системой компьютера?</div>
+
+        <div class="container"><input type="checkbox" onclick="CheckClick(event)">может</div>
+        <div class="container"><input type="checkbox" onclick="CheckClick(event)">не может</div>
+        
+    </div>
+
+    <button id="Reply" onclick="QustionReply()" style="width: 100px; display: none;">Ответить</button>
+
+    <script>
+        let Qustions = ["все варианты верны","интерпритируемым","не может"];
+        let currentQustions = 1;
+        let qustionsQuantity = 3;
+        let attempts = 0;
+        let currentSeconds = 60;
+
+        let timerId;
+
+        let rating = 0;
+        let answerText = "";
+        let UserName = document.getElementById("Name").innerText;
+
+        document.getElementById("Qustions_Count").innerText = `Вопросов ${currentQustions} из ${qustionsQuantity}`;
+
+
+        function startTest(){
+            document.getElementById("StartInfo").style.display = "none";
+            document.getElementById("Qustion1").style.display = "block";
+            document.getElementById("Reply").style.display = "block";
+            timerId = setInterval(timerUpd, 1000);
+        }
+
+        function QustionReply(){
+
+            if(currentQustions < qustionsQuantity + 1){
+                
+                document.getElementById(`Qustion${currentQustions}`).style.display = "none";
+                debugger;
+                if( answerText == Qustions[currentQustions - 1]){
+                    rating++;
+                }
+
+                currentQustions++;
+                document.getElementById(`Qustion${currentQustions}`).style.display = "block";
+
+                document.getElementById("Qustions_Count").innerText = `Вопросов ${currentQustions} из ${qustionsQuantity}`;
+
+                answerText = "";
+            }
+            else{
+                UserName = document.getElementById("Name").innerText;
+                alert(`Поздравляем ${UserName}!Тест сдан на ${rating}`);
+            }
+        
+        }
+
+        function CheckClick(event){
+            
+            let CheckBox = document.getElementById(`Qustion${currentQustions}`).querySelectorAll("input");
+
+            CheckBox.forEach(element => element.checked = false);
+            
+            event.target.checked = true;
+            answerText = event.target.nextSibling.data;
+        }
+
+        function LoadUserInfo(){
+            if(parseInt( getCookie("Attempts") ) == 5){
+                document.body.style.display = "none";
+                alert("Вы достигли максимального колличества попыток (5)");
+            }
+            else{
+                attempts = parseInt( getCookie("Attempts") );
+                rating = parseInt( getCookie("Rating") );
+                UserName = parseInt( getCookie("UserName") );
+            }
+        }
+
+        function SaveInfo(){
+            attempts++;
+            document.cookie = "Attempts" + "=" + `${attempts}` + ";";
+            document.cookie = "Rating" + "=" + `${rating}` + ";";
+            document.cookie = "UserName" + "=" + `${UserName}` + ";";
+
+            document.getElementById("Name").innerText = UserName;
+
+        }
+
+        function getCookie(name) {
+            let matches = document.cookie.match(new RegExp(
+            "(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"));
+
+            return matches ? decodeURIComponent(matches[1]) : undefined;
+        }
+
+    </script>
 </body>
 </html>
