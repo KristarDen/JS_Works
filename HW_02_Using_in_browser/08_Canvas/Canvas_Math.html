@@ -45,13 +45,12 @@
 
     function drawTime(val, width, heith) {
         debugger;
+        ctx.beginPath(); 
         ctx.translate(150,150);
-
-        ctx.clearRect(centerX, centerY, width, heith);
 
         ctx.rotate(val * Math.PI / 180);
 
-        ctx.fillRect(centerX, centerY, width, heith);
+        ctx.fillRect(-width/2, -heith/2, width, heith);
     }
 
 </script>
