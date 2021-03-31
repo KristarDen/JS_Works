@@ -1,57 +1,75 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Canvas_Math</title>
-</head>
+  </head>
 
-<body>
-    <canvas id="Circle" width="1000" height="1000"></canvas>
-    
-</body>
+  <body>
+    <canvas id="Circle" width="250" height="250"></canvas>
+    <label id="sec"></label>
+  </body>
 
-<script>
-   
-
-
+  <script>
     let circ = document.getElementById("Circle");
 
-    let centerX = 150, centerY = 150;
+    let centerX = 100, centerY = 100;
    
     let ctx = circ.getContext("2d");
-    
-    ctx.strokeStyle = '#ffd007';
+    ctx.translate(110,110);
+    let radius = circ.height / 2;
+    ctx.strokeStyle = "#000000";
     ctx.lineWidth = 6;
     ctx.beginPath();
-    ctx.arc(150, 150, 100, 0, 2 * Math.PI);
+    ctx.arc(0, 0, 100, 0, 2 * Math.PI);
     ctx.stroke();
 
     let SecTimer = setInterval(SecArrow_Rotate, 1000);
 
     function SecArrow_Rotate() {
-        debugger;
-        let time = new Date(),
-        sec = time.getSeconds(),
-        min = time.getMinutes(),
-        hrs = time.getHours();
-
-        drawTime(sec * 6, 90, 2);
-        drawTime(min * 6, 80, 3);
-        drawTime(hrs * 30, 70, 4);
+      
+      ctx.clearRect(-110, -110, 2000, 2000);
+      drawCircle();
+      debugger;
+      var now = new Date();
+      var hour = now.getHours();
+      var minute = now.getMinutes();
+      var second = now.getSeconds();
+      //hour
+      hour = hour % 12;
+      hour =
+        (hour * Math.PI) / 6 +
+        (minute * Math.PI) / (6 * 60) +
+        (second * Math.PI) / (360 * 60);
+      drawHand(ctx, hour, (radius-10) * 0.5, 4);
+      //minute
+      minute = (minute * Math.PI) / 30 + (second * Math.PI) / (30 * 60);
+      drawHand(ctx, minute,  (radius-20) * 0.8, 2);
+      // second
+      second = (second * Math.PI) / 30;
+      drawHand(ctx, second,  (radius-20) * 0.9, 1);
+      
     }
 
-    function drawTime(val, width, heith) {
-        debugger;
-        ctx.beginPath(); 
-        ctx.translate(150,150);
-
-        ctx.rotate(val * Math.PI / 180);
-
-        ctx.fillRect(-width/2, -heith/2, width, heith);
+    function drawHand(ctx, pos, length, width) {
+      debugger;
+      ctx.beginPath();
+      ctx.lineWidth = width;
+      ctx.lineCap = "round";
+      ctx.moveTo(0, 0);
+      ctx.rotate(pos);
+      ctx.lineTo(0, -length);
+      ctx.stroke();
+      ctx.rotate(-pos);
     }
-
-</script>
+    function drawCircle() {
+      ctx.strokeStyle = "#000000";
+      ctx.lineWidth = 6;
+      ctx.beginPath();
+      ctx.arc(0, 0, 100, 0, 2 * Math.PI);
+      ctx.stroke();
+    }
+  </script>
 </html>
