@@ -7,12 +7,23 @@
     <title>RegEx</title>
 </head>
 <body>
-    <label>Введите имя</label>
-    <input type="text" id="Text1">
+    <label id="LB">Введите имя</label>
+    <input oninput="check()" type="text" id="Text1">
 
     <script>
-        let TextBox = document.getElementById("Text1");
-        let regexp = /^[а-я].||/ ;
+        function check(){
+            debugger;
+            let TextBox = document.getElementById("Text1");
+            let regexp = /^[а-я]\s\W\.?\W\.?/ ;
+
+            let txt = TextBox.value;
+
+            if(regexp.test(txt)){
+                document.getElementById("LB").innerText = "Введено правильно";
+            }
+            else  document.getElementById("LB").innerText = "Введено неправильно !!!";
+        }
+       
     </script>
 </body>
 </html>
