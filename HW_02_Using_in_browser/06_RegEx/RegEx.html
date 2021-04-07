@@ -13,14 +13,19 @@
     <script>
         function check(){
             debugger;
-            let TextBox = document.getElementById("Text1");
-            let regexp = /^[а-я]\s\W\.?\W\.?/ ;
 
-            let txt = TextBox.value;
+            const regexp = /(\w)+( )+\w\.( )*\w\./;
 
-            if(regexp.test(txt)){
+            let txt = document.getElementById("Text1").value;
+
+            let trig = regexp.test(txt);
+            
+            if(trig == true){
+
                 document.getElementById("LB").innerText = "Введено правильно";
+
             }
+
             else  document.getElementById("LB").innerText = "Введено неправильно !!!";
         }
        
