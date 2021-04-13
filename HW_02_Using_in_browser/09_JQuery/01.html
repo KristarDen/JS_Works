@@ -1,12 +1,83 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>01 Jquery</title>
-</head>
-<body>
+    <script type="text/javascript" src="jquery.js"></script>
+  </head>
+
+  <body>
+    <h1>Random String Generator</h1>
+
+    <div id="Num_block">
+      String should be
+      <input type="number" id="Num" min="2" max="100" />
+      characters long
+    </div>
+
+    <div id="check_Block">
+      Which characters are allowed to occur in the strings?
+      <div><input type="checkbox" id="With_Numeric" />Numeric digits (0-9)</div>
+      <div>
+        <input type="checkbox" id="With_Uppercase_Letter" />Uppercase letters
+        (A-Z)
+      </div>
+      <div>
+        <input type="checkbox" id="With_Lowercase_Letter" />Lowercase letters
+        (a-z)
+      </div>
+      <button id="Generate">Generate</button>
+    </div>
     
-</body>
+  </body>
+
+  <script>
+    $("body").css("background-color", "Khaki");
+    $("body").css("font-family", "Verdana");
+
+    $("#With_Numeric").css("margin-left", "10px");
+    $("#With_Uppercase_Letter").css("margin-left", "10px");
+    $("#With_Lowercase_Letter").css("margin-left", "10px");
+
+    $("#Num_block").css("margin-bottom", "10px");
+    $("#Generate").click(function(){
+      debugger;
+      let result = "";
+      let MaxSymbols = 0;
+
+      let With_Upp = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+      let With_Low = "abcdefghijklmnopqrstuvwxyz";
+      let With_Num = "0123456789";
+      let str_for_compare = "";
+     
+      MaxSymbols =  parseInt($("#Num").val());
+
+      if ($("#With_Numeric").val()) {
+        str_for_compare += With_Num;
+      }
+
+      if ($("#With_Uppercase_Letter").val()) {
+        str_for_compare += With_Upp;
+      }
+
+      if ($("#With_Lowercase_Letter").val()) {
+        str_for_compare += With_Low;
+      }
+
+      for(let i = 0; i <= MaxSymbols; i++){
+        result+= str_for_compare[getRandom(0,MaxSymbols-1)];
+      }
+      $("#check_Block").css("border-width", "1px");
+      $("#check_Block").css("border-style", "solid");
+      $("#check_Block").css("border-color", "black"); 
+      let res = `<span>${result}</span>`;
+      $("body").append(res);
+    });
+
+    function getRandom(min, max) {
+      return Math.random() * (max - min) + min;
+    }
+  </script>
 </html>
