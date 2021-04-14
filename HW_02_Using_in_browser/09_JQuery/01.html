@@ -30,11 +30,14 @@
       </div>
       <button id="Generate">Generate</button>
     </div>
-    
   </body>
 
   <script>
-    $("body").css("background-color", "Khaki");
+    $("body").css("background-image", "url(background.jpeg)");
+    $("body").css("background-size", "cover");
+    $("body").css("background-repeat", "no-repeat");
+    $("body").css("background-color", "#081013");
+    $("body").css("color", "green");
     $("body").css("font-family", "Verdana");
 
     $("#With_Numeric").css("margin-left", "10px");
@@ -42,42 +45,50 @@
     $("#With_Lowercase_Letter").css("margin-left", "10px");
 
     $("#Num_block").css("margin-bottom", "10px");
-    $("#Generate").click(function(){
+    $("#check_Block").css("border-width", "1px");
+    $("#check_Block").css("border-style", "solid");
+    $("#check_Block").css("border-color", "lightgreen");
+
+    $("#Generate").click(function () {
       debugger;
-      let result = "";
       let MaxSymbols = 0;
+      MaxSymbols = parseInt($("#Num").val());
+      if (MaxSymbols > 0) {
+        let result = "";
 
-      let With_Upp = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-      let With_Low = "abcdefghijklmnopqrstuvwxyz";
-      let With_Num = "0123456789";
-      let str_for_compare = "";
-     
-      MaxSymbols =  parseInt($("#Num").val());
+        let With_Upp = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        let With_Low = "abcdefghijklmnopqrstuvwxyz";
+        let With_Num = "01234567890123456789";
+        let str_for_compare = "";
 
-      if ($("#With_Numeric").val()) {
-        str_for_compare += With_Num;
+        let val_Num = $("#With_Numeric").prop("checked");
+        if (val_Num == true) {
+          str_for_compare = str_for_compare.concat(`${With_Num}`);
+        }
+
+        let val_Upp = $("#With_Uppercase_Letter").prop("checked");
+        if (val_Upp == true) {
+          str_for_compare = str_for_compare.concat(`${With_Upp}`);
+        }
+
+        let val_Low = $("#With_Lowercase_Letter").prop("checked");
+        if (val_Low == true) {
+          str_for_compare = str_for_compare.concat(`${With_Low}`);
+        }
+
+        for (let i = 0; i < MaxSymbols; i++) {
+          result += str_for_compare[getRandom(str_for_compare.length)];
+        }
+
+        let res = `<div>${result}</div>`;
+
+        $("body").append(res);
       }
 
-      if ($("#With_Uppercase_Letter").val()) {
-        str_for_compare += With_Upp;
-      }
-
-      if ($("#With_Lowercase_Letter").val()) {
-        str_for_compare += With_Low;
-      }
-
-      for(let i = 0; i <= MaxSymbols; i++){
-        result+= str_for_compare[getRandom(0,MaxSymbols-1)];
-      }
-      $("#check_Block").css("border-width", "1px");
-      $("#check_Block").css("border-style", "solid");
-      $("#check_Block").css("border-color", "black"); 
-      let res = `<span>${result}</span>`;
-      $("body").append(res);
     });
 
-    function getRandom(min, max) {
-      return Math.random() * (max - min) + min;
+    function getRandom(max) {
+      return Math.floor(Math.random() * max);
     }
   </script>
 </html>
